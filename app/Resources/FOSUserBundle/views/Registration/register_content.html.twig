@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-signin'}}) }}
+    <h2 class="form-signin-heading">Zarejestruj się</h2>
+    {{ form_label(form.email, 'email', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email'}}) }}
+
+    {{ form_label(form.username, 'login', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'login'}}) }}
+
+    {{ form_label(form.plainPassword.first, 'hasło', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'hasło'}}) }}
+
+    {{ form_label(form.plainPassword.second, 'powtórz hasło', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'powtórz hasło'}}) }}
+    <br>
+    <div>
+        <input type="submit" value="Wyślij" class="btn btn-lg btn-primary btn-block" />
+    </div>
+{{ form_end(form) }}
