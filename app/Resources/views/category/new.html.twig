@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+    <h2 class="form-signin-heading">Dodaj nową kategorię</h2>
+    {{ form_label(form.name, 'kategoria', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'nazwa'}}) }}
+
+    {{ form_label(form.user, 'kategoria', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.user, {'value' : app.user.id|number_format,'attr': {'class': 'hidden'} }) }}
+    <div>
+        <input type="submit" value="Wyślij" class="btn btn-lg btn-primary btn-block" />
+    </div>
+    {{ form_end(form) }}
+    <div class="remember">
+        <a href="{{ path('category_index') }}">Wróc do listy kategorii</a>
+    </div>
+{% endblock %}

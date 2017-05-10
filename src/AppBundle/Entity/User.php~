@@ -71,37 +71,4 @@ class User extends BaseUser
     {
         return $this->tasks;
     }
-
-    /**
-     * Add categories
-     *
-     * @param \AppBundle\Entity\Category $categories
-     * @return User
-     */
-    public function addCategory(\AppBundle\Entity\Category $categories)
-    {
-        $this->categories[] = $categories;
-
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \AppBundle\Entity\Category $categories
-     */
-    public function removeCategory(\AppBundle\Entity\Category $categories)
-    {
-        $this->categories->removeElement($categories);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 }

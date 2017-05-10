@@ -1,17 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block content %}
-            <div class="text-right">
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <span>Zalogowany jako <b>{{ app.user.username }}</b></span>
-                    <a href="{{ path('fos_user_profile_show') }}">Moje dane</a>
-                    <a href="{{ path('fos_user_profile_edit') }}">Edycja danych</a>
-                    <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
-                {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">Logowanie</a>
-                    <a href="{{ path('fos_user_registration_register') }}">Rejestracja</a>
-                {% endif %}
-            </div>
+{% block body %}
             <div>
                 {% if app.request.hasPreviousSession %}
                     {% for type, messages in app.session.flashbag.all() %}
