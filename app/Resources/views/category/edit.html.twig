@@ -1,21 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
+    {{ form_start(edit_form, {'attr': {'class': 'form-signin'}}) }}
+    <h2 class="form-signin-heading text-center">Edytuj kategorię</h2>
+    {{ form_label(edit_form.name, 'kategoria', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    {{ form_label(edit_form.user, 'użytkownik', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(edit_form.user, {'value' : app.user.id|number_format,'attr': {'class': 'hidden'} }) }}
+        <input type="submit" value="Edytuj" class="btn btn-lg btn-primary btn-block">
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_start(delete_form, {'attr': {'class': 'form-signin'}}) }}
+        <input type="submit" value="Usuń" class="btn btn-lg btn-primary btn-block">
+    {{ form_end(delete_form) }}
+
 {% endblock %}

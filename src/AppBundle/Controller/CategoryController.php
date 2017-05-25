@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
-use AppBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,9 +23,10 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $userId = $this->getUser()->getId();
 
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('AppBundle:Category')->findBy(['user' => $userId]);
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -41,6 +41,8 @@ class CategoryController extends Controller
      */
     public function newAction(Request $request)
     {
+        $userId = $this->getUser()->getId();
+
         $category = new Category($this->get('security.context')->getToken()->getUser());
         $form = $this->createForm('AppBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
@@ -49,8 +51,11 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
+            $categories = $em->getRepository('AppBundle:Category')->findBy(['user' => $userId]);
 
-            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            return $this->render('category/index.html.twig', array(
+                'categories' => $categories,
+            ));
         }
 
         return $this->render('category/new.html.twig', array(
@@ -83,14 +88,20 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        $userId = $this->getUser()->getId();
+
         $deleteForm = $this->createDeleteForm($category);
         $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $categories = $em->getRepository('AppBundle:Category')->findBy(['user' => $userId]);
 
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            return $this->render('category/index.html.twig', array(
+                'categories' => $categories,
+            ));
         }
 
         return $this->render('category/edit.html.twig', array(

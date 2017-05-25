@@ -12,7 +12,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">To-DooD-oT List</a>
+                    <a class="navbar-brand" href="#">TodO list</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -21,34 +21,37 @@
                             <a href="{{ path('app_planner_show') }}">Home</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategorie<span class="caret"></span>
+                            <a href="{{ path('category_index') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategorie<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ path('category_new') }}">Dodaj nową</a>
                                 </li>
                                 <li>
-                                    <a href="#">Lista</a>
+                                    <a href="{{ path('category_index') }}">Lista</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zadania<span class="caret"></span>
+                            <a href="{{ path('task_index') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zadania<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="">Dodaj nowe</a>
+                                    <a href="{{ path('task_new') }}">Dodaj nowe</a>
                                 </li>
                                 <li>
-                                    <a href="#">Wykonane</a>
+                                    <a href="{{ path('taskby_status', { 'id': 1 }) }}">Wykonane</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('task_index') }}">Niewykonane</a>
+                                    <a href="{{ path('taskby_status', { 'id': 2 }) }}">Niewykonane</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('task_index') }}">Wszystkie</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Użytkownik<span class="caret"></span>
+                            <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Użytkownik<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>

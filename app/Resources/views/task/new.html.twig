@@ -1,16 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Task creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+        <h2 class="form-signin-heading text-center">Dodaj nowe zadanie</h2>
+        {{ form_label(form.name, 'Tytuł', {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'tytuł'}}) }}
+
+        {{ form_label(form.description, 'Opis', {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'opis'}}) }}
+
+        {{ form_label(form.realizationDate, 'Termin realizacji') }}
+        {{ form_widget(form.realizationDate, {'attr': {'class': 'form-control text-center'}}) }}
+
+        {{ form_label(form.priority, 'Priorytet') }}
+        {{ form_widget(form.priority, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.status, 'Status') }}
+        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(form.category, 'Kategoria') }}
+        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+
+        <div>
+            <input type="submit" value="Wyślij" class="btn btn-lg btn-primary btn-block">
+        </div>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

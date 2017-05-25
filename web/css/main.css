@@ -107,6 +107,14 @@ body {
   }
 }
 
+.jumbotron {
+    background-color: #bbb;
+}
+
+.btn {
+    margin: 4px;
+}
+
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 120px;

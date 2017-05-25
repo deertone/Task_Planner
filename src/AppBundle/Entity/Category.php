@@ -25,7 +25,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=false)
      */
     private $name;
 
@@ -127,10 +127,14 @@ class Category
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
     }
+
+    public function __toString() {
+    return $this->name;
+}
 }

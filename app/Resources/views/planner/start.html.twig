@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h2>Swoją przygodę z Task Planner rozpocznij od stworzenia kategorii dla swoich zadań!!!</h2>
-
+    <div class="jumbotron">
+        <h1>TodO List</h1>
+        <p>Witaj w naszej wspaniałej aplikacji. Swoją przygodę z planerem rozpocznij od stworzenia nowej kategorii dla swoich zadań.</p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="{{ path('category_new') }}" role="button">Dodaj kategorię</a>
+        </p>
+    </div>
 {% endblock %}

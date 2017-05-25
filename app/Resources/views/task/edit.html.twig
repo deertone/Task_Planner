@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Task edit</h1>
+    {{ form_start(edit_form, {'attr': {'class': 'form-signin'}}) }}
+        <h2 class="form-signin-heading text-center">Edytuj zadanie</h2>
+        {{ form_label(edit_form.name, 'Tytuł', {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_widget(edit_form.name, {'attr': {'class': 'form-control', 'placeholder': 'tytuł'}}) }}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+        {{ form_label(edit_form.description, 'Opis', {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_widget(edit_form.description, {'attr': {'class': 'form-control', 'placeholder': 'opis'}}) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        {{ form_label(edit_form.realizationDate, 'Termin realizacji') }}
+        {{ form_widget(edit_form.realizationDate, {'attr': {'class': 'form-control text-center'}}) }}
+
+        {{ form_label(edit_form.priority, 'Priorytet') }}
+        {{ form_widget(edit_form.priority, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(edit_form.status, 'Status') }}
+        {{ form_widget(edit_form.status, {'attr': {'class': 'form-control'}}) }}
+
+        {{ form_label(edit_form.category, 'Kategoria') }}
+        {{ form_widget(edit_form.category, {'attr': {'class': 'form-control'}}) }}
+            <input type="submit" value="Edytuj" class="btn btn-lg btn-primary btn-block">
+        {{ form_end(edit_form) }}
+
+
+        {{ form_start(delete_form, {'attr': {'class': 'form-signin'}}) }}
+            <input type="submit" value="Usuń" class="btn btn-lg btn-primary btn-block">
+        {{ form_end(delete_form) }}
 {% endblock %}

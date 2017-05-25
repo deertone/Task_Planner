@@ -230,7 +230,7 @@ class Task
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -253,7 +253,7 @@ class Task
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
@@ -276,10 +276,12 @@ class Task
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
     }
+
+    
 }

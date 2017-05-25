@@ -1,39 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Categories list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <h3 class="text-center">Lista kategorii</h3>
+            <table class="table table-striped text-center" style="margin-top:50px;">
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>
+                                <h4>{{ category.name }}</h4>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('category_edit', { 'id': category.id }) }}" role="button">Edytuj/Usuń</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="remember">
+                <a href="{{ path('category_new') }}">Dodaj kategorię</a>
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+    </div>
 {% endblock %}

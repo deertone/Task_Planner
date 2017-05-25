@@ -23,9 +23,11 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
+        $userId = $this->getUser()->getId();
+
         $em = $this->getDoctrine()->getManager();
 
-        $tasks = $em->getRepository('AppBundle:Task')->findAll();
+        $tasks = $em->getRepository('AppBundle:Task')->findBy(['user' => $userId]);
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -40,16 +42,27 @@ class TaskController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+        $userId = $this->getUser()->getId();
+        // $em = $this->getDoctrine()->getManager();
+        // $query = $em->createQuery("SELECT c.name FROM AppBundle:Category c WHERE c.user = $userId");
+        // $category = $query->getResult();
+
         $task = new Task();
-        $form = $this->createForm('AppBundle\Form\TaskType', $task);
+        $form = $this->createForm('AppBundle\Form\TaskType', $task, ['userId' => $userId]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $task->setUser($user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
+            $tasks= $em->getRepository('AppBundle:Task')->findBy(['user' => $userId]);
 
-            return $this->redirectToRoute('task_show', array('id' => $task->getId()));
+            return $this->render('task/index.html.twig', array(
+                'tasks' => $tasks,
+            ));
         }
 
         return $this->render('task/new.html.twig', array(
@@ -82,14 +95,21 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
+        $userId = $this->getUser()->getId();
+
         $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
+        $editForm = $this->createForm('AppBundle\Form\TaskType', $task, ['userId' => $userId]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('task_edit', array('id' => $task->getId()));
+            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $tasks= $em->getRepository('AppBundle:Task')->findBy(['user' => $userId]);
+
+            return $this->render('task/index.html.twig', array(
+                'tasks' => $tasks,
+            ));
         }
 
         return $this->render('task/edit.html.twig', array(

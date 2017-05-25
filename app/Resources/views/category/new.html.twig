@@ -6,7 +6,7 @@
     {{ form_label(form.name, 'kategoria', {'label_attr': {'class': 'sr-only'}}) }}
     {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'nazwa'}}) }}
 
-    {{ form_label(form.user, 'kategoria', {'label_attr': {'class': 'sr-only'}}) }}
+    {{ form_label(form.user, 'użytkownik', {'label_attr': {'class': 'sr-only'}}) }}
     {{ form_widget(form.user, {'value' : app.user.id|number_format,'attr': {'class': 'hidden'} }) }}
     <div>
         <input type="submit" value="Wyślij" class="btn btn-lg btn-primary btn-block" />

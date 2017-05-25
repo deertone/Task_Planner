@@ -1,52 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h2>Wszystkie zadania z kategorii </h2
-
-        <h1>Tasks list</h1>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Realizationdate</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for task in tasks %}
-                <tr>
-                    <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.description }}</td>
-                    <td>{% if task.realizationDate %}{{ task.realizationDate|date('Y-m-d') }}{% endif %}</td>
-                    <td>{{ task.priority }}</td>
-                    <td>{{ task.status }}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('task_show', { 'id': task.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('task_edit', { 'id': task.id }) }}">edit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <ul>
-            <li>
-                <a href="{{ path('task_new') }}">Create a new task</a>
-            </li>
-        </ul>
-
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3 class="text-center">Zadania z kategorii
+                {{ categories[0] }}</h3>
+            <table class="table table-striped" style="margin-top:50px;">
+                <thead>
+                    <tr>
+                        <th>Tytuł</th>
+                        <th>Opis</th>
+                        <th>Termin realizacji</th>
+                        <th>Priorytet</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th>Komentarz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>
+                                <h4>{{ task.name }}</h4>
+                            </td>
+                            <td>{{ task.description }}</td>
+                            <td>
+                                <h4>{{ task.realizationDate|date("d/m/Y") }}</h4>
+                            </td>
+                            <td>
+                                <h4>{{ task.priority }}</h4>
+                            </td>
+                            <td>
+                                <h4>{{ task.status }}</h4>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('task_edit', { 'id': task.id }) }}" role="button">Edytuj/Usuń</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('comment_new', { 'id': task.id }) }}" role="button">Dodaj</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="remember">
+                <a href="{{ path('app_planner_show') }}">Wróć do strony głównej</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
